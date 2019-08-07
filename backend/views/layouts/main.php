@@ -44,7 +44,7 @@ LayUIAssetAlias::register($this);
             ">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <?= Yii::$app->user->identity->username ?>
+<!--                        --><?php //echo Yii::$app->user->identity->username ?>
                     </a>
                     <dl class="layui-nav-child">
                         <dd><?= Html::a('修改密码', '/admin/personal/reset-password') ?></dd>
