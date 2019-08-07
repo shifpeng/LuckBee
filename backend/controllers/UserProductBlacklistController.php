@@ -16,7 +16,7 @@ class UserProductBlacklistController extends Controller
 //        $tp->getAppName('');
         return $this->render('index', [
 //            'searchModel' => $searchModel,
-            'dataProvider' => $result,
+//            'dataProvider' => $result,
         ]);
     }
 }
