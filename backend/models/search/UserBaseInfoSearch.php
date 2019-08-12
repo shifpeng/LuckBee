@@ -48,6 +48,9 @@ class UserBaseInfoSearch extends TLmUserBaseInfo
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 30,
+            ],
             'sort' => [
                 'defaultOrder' => [
                     'add_time' => SORT_DESC,

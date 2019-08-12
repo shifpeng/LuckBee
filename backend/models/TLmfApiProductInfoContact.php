@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 /**
@@ -165,10 +166,21 @@ class TLmfApiProductInfoContact extends ActiveRecord
 
     public function getAppName($productIdList)
     {
-        if ($productIdList == "") {
-            return null;
-        }
-        $result = self::find()->select(['product_id', 'product_name'])->where(['in', 'product_id', explode(',', $productIdList)])->asArray()->all();
-        return $result;
+        $query = self::find()->select([]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 30,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'add_time' => SORT_DESC,
+                    'update_time' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        $query->where(['in', 'product_id', $productIdList]);
+        return $dataProvider;
     }
 }

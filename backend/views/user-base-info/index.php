@@ -9,13 +9,24 @@ LayUIAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserBaseInfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $env string */
+
 
 $this->title = '用户基本信息';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .pagination {
+        position: fixed;
+        bottom: -17px;
+        width: 100%;
+        padding: 19px 19px 19px 22px;
+        background-color: #fff;
+        height: 70px;
+    }
+</style>
 <?php Pjax::begin(); ?>
-<?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
+<?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
 <div class="layui-form" style="padding: 10px;">
     <?= GridView::widget([
         'id' => 'grid-view-list',
@@ -27,6 +38,9 @@ $this->title = '用户基本信息';
         'emptyText' => '没有匹配的记录',
         'showPageSummary' => false,
         'summary' => '',
+        'rowOptions' => function ($model) {
+            return ['style' => 'word-break: break-all'];
+        },
         'pager' => [
             'firstPageLabel' => "首页",
             'prevPageLabel' => '上一页',
@@ -34,8 +48,6 @@ $this->title = '用户基本信息';
             'lastPageLabel' => '尾页',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
 //            'id',
             'lm_member_id',
             'user_name',

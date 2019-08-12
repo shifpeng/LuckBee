@@ -9,6 +9,8 @@ LayUIAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\OrderInfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $env string */
+
 
 $this->title = '订单基本信息';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -24,7 +26,7 @@ $this->title = '订单基本信息';
     }
 </style>
 <?php Pjax::begin(); ?>
-<?php echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
 
 <div class="layui-form" style="padding: 10px;">
     <?= GridView::widget([
@@ -37,6 +39,9 @@ $this->title = '订单基本信息';
         'emptyText' => '没有匹配的记录',
         'showPageSummary' => false,
         'summary' => '',
+        'rowOptions' => function ($model) {
+            return ['style' => 'word-break: break-all'];
+        },
         'pager' => [
             'firstPageLabel' => "首页",
             'prevPageLabel' => '上一页',
@@ -50,7 +55,7 @@ $this->title = '订单基本信息';
             [
                 'label' => '会员ID',
                 'attribute' => 'lm_member_id',
-                'width' => '100px',
+                'width' => '270px',
             ], [
                 'label' => '用户姓名',
                 'attribute' => 'user_name',
@@ -60,19 +65,24 @@ $this->title = '订单基本信息';
 //            'user_phone_no',
 //            'distributor_id',
             //'tenant_company_id',
-            'tenant_product_id',
+            [
+                'label' => '产品ID',
+                'attribute' => 'tenant_product_id',
+                'width' => '100px',
+            ],
+//            '',
 //            'source',
             //'reloan',
             [
                 'label' => '订单号',
                 'attribute' => 'order_no',
-                'width' => '100px',
+                'width' => '250px',
             ],
 //            'order_no',
             [
                 'label' => '数据ID',
                 'attribute' => 'base_data_id',
-                'width' => '100px',
+                'width' => '250px',
             ],
 //            'base_data_id',
             //'base_data_hash',
@@ -93,7 +103,7 @@ $this->title = '订单基本信息';
                 'attribute' => 'status',
                 'width' => '320px',
                 'value' => function ($dataProvider) {
-                    $status = [000 => '未知状态', 001 => '预申请', 002 => "一推已推送", 100 => '资料填写完成, 订单已创建 ', 200 => '订单已推送, 审批授信中', 300 => '审批授信通过', 910 => '审批授信未通过(及时)',
+                    $status = [0 => '未知状态', 1 => '预申请', 2 => "一推已推送", 100 => '资料填写完成, 订单已创建 ', 200 => '订单已推送, 审批授信中', 300 => '审批授信通过', 910 => '审批授信未通过(及时)',
                         911 => '审批授信未通过(回调)', 912 => '审批授信未通过(查询) ', 400 => '待开户', 410 => '待提款', 420 => '审核中', 500 => '放款成功', 920 => '放款失败', 600 => '订单整体还款中', 610 => '本期待还款',
                         611 => '本期还款中', 612 => '本期已结清', 613 => '本期还款失败', 700 => '逾期', 900 => '订单已完成 - 贷款取消', 990 => '订单已完成 - 贷款结清'];
                     return "【" . $dataProvider->status . "】-" . (isset($status[$dataProvider->status]) ? $status[$dataProvider->status] : '');
@@ -114,10 +124,26 @@ $this->title = '订单基本信息';
             //'repush_base_times:datetime',
             //'repush_supplement_times:datetime',
             //'del_flag',
-            'pre_apply_time',
-            'apply_time',
-            'add_time',
-            'update_time',
+            [
+                'label' => '一推时间',
+                'attribute' => 'pre_apply_time',
+                'width' => '200px',
+            ],
+            [
+                'label' => '二推时间',
+                'attribute' => 'apply_time',
+                'width' => '200px',
+            ],
+            [
+                'label' => '创建时间',
+                'attribute' => 'add_time',
+                'width' => '200px',
+            ],
+            [
+                'label' => '更新时间',
+                'attribute' => 'update_time',
+                'width' => '200px',
+            ],
             //'p_value',
             //'tag',
             //'channel_tag',
@@ -138,7 +164,7 @@ $this->title = '订单基本信息';
                     $options = [
                         'class' => 'layui-btn layui-btn-sm',
                         'data-pjax' => '0',
-                        'onclick' => " zNewWin('',\"/motorcade/customer/update-customer?id=$model->id&op=review\",169,181)"
+                        'onclick' => ""
                     ];
                     return Html::button($label, $options);
                 }]

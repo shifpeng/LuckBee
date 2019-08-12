@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ApiProductInfoController implements the CRUD actions for TLmfApiProductInfoContact model.
  */
-class ApiProductInfoController extends Controller
+class ApiProductInfoController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -41,6 +41,7 @@ class ApiProductInfoController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => ''
         ]);
     }
 
@@ -53,6 +54,7 @@ class ApiProductInfoController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => 'pro'
         ]);
     }
 

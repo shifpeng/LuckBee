@@ -4,10 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\search\UserVerifyRecordSearch */
+/* @var $model backend\models\search\UserProductBlacklistSearch */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $env string */
-
 ?>
 <style>
     .layui-form-label {
@@ -15,11 +13,8 @@ use yii\widgets\ActiveForm;
     }
 </style>
 
-<?php
-$str = $env == 'pro' ? 'search' : 'index';
-?>
 <?php $form = ActiveForm::begin([
-    'action' => [$str],
+    'action' => ['index'],
     'method' => 'get',
     'options' => [
         'data-pjax' => 1
@@ -29,15 +24,9 @@ $str = $env == 'pro' ? 'search' : 'index';
     <div class="layui-form-item">
         <div class="layui-inline" style="margin-top:18px;">
             <div class="layui-inline">
-                <label class="layui-form-label">会员ID</label>
+                <label class="layui-form-label">手机号</label>
                 <div class="layui-input-inline">
-                    <?= $form->field($model, 'lm_member_id')->textInput(['placeholder' => '请输入会员ID', 'style' => 'width:200px;'])->label(false)->error(false) ?>
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">产品ID</label>
-                <div class="layui-input-inline">
-                    <?= $form->field($model, 'product_id')->textInput(['placeholder' => '请输入产品ID', 'style' => 'width:200px;'])->label(false)->error(false) ?>
+                    <?= $form->field($model, 'id')->textInput(['placeholder' => '请输入用户手机号', 'style' => 'width:200px;'])->label(false)->error(false) ?>
                 </div>
             </div>
 
@@ -47,6 +36,6 @@ $str = $env == 'pro' ? 'search' : 'index';
             <?= Html::resetButton('&emsp;重&emsp;置&emsp;', ['class' => 'layui-btn layui-btn-radius layui-btn-primary layui-btn-sm']) ?>
         </div>
     </div>
-    <?php ActiveForm::end(); ?>
-
 </div>
+<?php ActiveForm::end(); ?>
+

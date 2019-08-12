@@ -6,15 +6,19 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\OrderInfoSearch */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $env string */
+
 ?>
 <style>
     .layui-form-label {
         width: 120px;
     }
 </style>
-
+<?php
+$str = $env == 'pro' ? 'search' : 'index';
+?>
 <?php $form = ActiveForm::begin([
-    'action' => ['index'],
+    'action' => [$str],
     'method' => 'get',
     'options' => [
         'data-pjax' => 1

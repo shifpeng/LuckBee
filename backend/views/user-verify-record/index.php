@@ -7,6 +7,8 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserVerifyRecordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $env string */
+
 
 $this->title = '撞库记录';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -24,7 +26,7 @@ $this->title = '撞库记录';
 <div class="">
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
     <div class="layui-form" style="padding: 10px;">
         <?= GridView::widget([
             'id' => 'grid-view-list',
@@ -42,9 +44,11 @@ $this->title = '撞库记录';
                 'nextPageLabel' => '下一页',
                 'lastPageLabel' => '尾页',
             ],
+            'rowOptions' => function ($model) {
+                return ['style' => 'word-break: break-all'];
+            },
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
 //            'id',
                 'lm_member_id',
                 'product_id',
@@ -55,7 +59,7 @@ $this->title = '撞库记录';
                     'attribute' => 'status',
                     'width' => '220px',
                     'value' => function ($dataProvider) {
-                        $status = [0 => '不可申请', 1 => '可申请', 2 => "可复贷", '3' => '撞库出错', 4 => '撞库超时', 5 => 'FSP超时'];
+                        $status = [0 => '不可申请', 1 => '可申请', 2 => "可复贷", '3' => '撞库出错', 4 => '撞库超时', 5 => 'FSP超时',21=>'用户基本信息不存在'];
                         return isset($status[$dataProvider->status]) ? $status[$dataProvider->status] : '';
                     },
                 ],

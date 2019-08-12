@@ -12,6 +12,7 @@ LayUIAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\ApiProductInfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $env string */
 
 $this->title = '商户产品信息';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -36,8 +37,7 @@ $this->title = '商户产品信息';
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
 
     <div class="layui-form" style="padding: 10px;">
         <?= GridView::widget([
@@ -49,6 +49,9 @@ $this->title = '商户产品信息';
             'tableOptions' => ['class' => 'layui-table', 'lay-skin' => "row"],
             'emptyText' => '没有匹配的记录',
             'showPageSummary' => false,
+            'rowOptions' => function ($model) {
+                return ['style' => 'word-break: break-all'];
+            },
             'summary' => '',
             'pager' => [
                 'firstPageLabel' => "首页",
@@ -57,52 +60,56 @@ $this->title = '商户产品信息';
                 'lastPageLabel' => '尾页',
             ],
             'columns' => [
+//                [
+//                    'width' => '49px',
+//                    'class' => 'kartik\grid\SerialColumn',
+//                ],
                 [
                     'label' => '产品ID',
                     'attribute' => 'product_id',
-                    'width' => '100px',
+                    'width' => '80px',
                 ], [
                     'label' => 'app_id',
                     'attribute' => 'app_id',
-                    'width' => '200px',
+                    'width' => '190px',
                 ],
 
                 [
                     'label' => '产品名称',
                     'attribute' => 'product_name',
-                    'width' => '300px',
+                    'width' => '200px',
                 ],
                 [
-                    'label' => '公钥',
+//                    'headerOptions' => ['style' => 'display: flex;flex-shrink: 0;word-break: break-all;'],
+                    'label' => '产品公钥',
                     'attribute' => 'rsa_pub_key',
-                    'width' => '650px',
+                    'width' => '550px',
                     'value' => function ($model) {
-                        return str_replace(' ', '', $model->rsa_pub_key);
+                        $qian = array(" ", "　", "\t", "\n", "\r");
+                        return str_replace($qian, '', $model->rsa_pub_key);
                     }
 
                 ],
-//            [
-//                'label' => '机构公钥',
-//                'attribute' => 'product_pub_key',
-//                'width' => '200px',
-//            ],
+                [
+                    'label' => '机构公钥',
+                    'attribute' => 'product_pub_key',
+                    'width' => '600px',
+                ],
                 [
                     'label' => '公司名称',
                     'attribute' => 'company_name',
-                    'width' => '350px',
+                    'width' => '200px',
                 ],
                 [
                     'label' => '添加时间',
                     'attribute' => 'add_time',
-                    'width' => '300px',
+                    'width' => '150px',
                 ],
                 [
                     'label' => '更新时间',
                     'attribute' => 'update_time',
-                    'width' => '300px',
+                    'width' => '150px',
                 ],
-//                '',
-//                ''
 //            ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>

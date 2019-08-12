@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ApiLogController implements the CRUD actions for TLmApiLog model.
  */
-class ApiLogController extends Controller
+class ApiLogController extends BaseController
 {
     /**
      * {@inheritdoc}

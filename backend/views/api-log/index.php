@@ -35,6 +35,9 @@ $this->title = '接口请求日志';
         'emptyText' => '没有匹配的记录',
         'showPageSummary' => false,
         'summary' => '',
+        'rowOptions' => function ($model) {
+            return ['style' => 'word-break: break-all'];
+        },
         'pager' => [
             'firstPageLabel' => "首页",
             'prevPageLabel' => '上一页',
@@ -45,26 +48,48 @@ $this->title = '接口请求日志';
 //            ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
-            'function_code',
+            [
+                'label' => '方法名',
+                'attribute' => 'function_code',
+                'width' => '200px',
+            ],
+//            'function_code',
             [
                 'label' => '键',
                 'attribute' => 'key_code',
-                'width' => '100px',
+                'width' => '200px',
             ],
             [
                 'label' => '值',
                 'attribute' => 'key_value',
-                'width' => '100px',
+                'width' => '200px',
             ],
-            'result_code',
-            'add_day',
-            'add_time',
+            [
+                'label' => '结果码',
+                'attribute' => 'result_code',
+                'width' => '80px',
+            ],
+//            [
+//                'label' => '添加日期',
+//                'attribute' => 'add_day',
+//                'width' => '100px',
+//            ],
+            [
+                'label' => '添加时间',
+                'attribute' => 'add_time',
+                'width' => '170px',
+            ],
             [
                 'label' => '入参',
                 'attribute' => 'request_json',
-                'width' => '20%',
+                'width' => '1300px',
             ],
-            'response_json:ntext',
+            [
+                'label' => '返参',
+                'attribute' => 'response_json',
+                'width' => '400px',
+            ],
+//            'response_json:ntext',
 
 
 //            ['class' => 'yii\grid\ActionColumn'],

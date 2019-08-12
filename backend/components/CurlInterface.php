@@ -194,7 +194,7 @@ class CurlInterface
      * Function Description:设置请求报文 $body 必须是个数组
      * Function Name: setBody
      * @param $body
-     * @param $type int 1:json 2:xml 3 发送原数据接收xml 4 发送原数据 接收json 5:都是原数据
+     * @param $type int 1:json 2:xml 3 发送原数据接收xml 4 发送原数据 接收json 5:都是原数据,6:需要base64解密再json
      *
      * @author 倪宗锋
      */
@@ -209,7 +209,7 @@ class CurlInterface
                 $this->body = "<?xml version='1.0' encoding='UTF-8'?>";
                 $this->body .= Util::arrayToXml($body);
                 $this->requestLength = strlen($this->body);
-            } elseif (in_array($type, array(3, 4, 5))) {
+            } elseif (in_array($type, array(3, 4, 5, 6))) {
                 $this->body = $body;
             }
         } else {
@@ -289,7 +289,7 @@ class CurlInterface
      * Function Description:获取返回数据
      * Function Name: getResult
      *
-     * @return array|mixed
+     * //     * @return array|mixed
      *
      * @author nizongfeng
      * Modify Date:2016.11.10
@@ -298,10 +298,13 @@ class CurlInterface
     {
         if (in_array($this->bodyType, array(1, 4))) {
             $return = json_decode($this->responseBody, true);
+
         } elseif (in_array($this->bodyType, array(2, 3))) {
             $return = Util::xmlToArray($this->responseBody);
         } elseif ($this->bodyType == 5) {
             $return = $this->responseBody;
+        } else if ($this->bodyType == 6) {
+            $return = json_decode(base64_decode($this->responseBody), true);
         } else {
             $return = '';
         }

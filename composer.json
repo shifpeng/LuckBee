@@ -19,6 +19,7 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "kartik-v/yii2-grid": "dev-master",
+        "yiisoft/yii2-redis": "~2.0.0",
       "ext-curl": "*"
     },
     "require-dev": {

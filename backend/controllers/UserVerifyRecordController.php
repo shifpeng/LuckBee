@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * UserVerifyRecordController implements the CRUD actions for TLmUserVerifyRecord model.
  */
-class UserVerifyRecordController extends Controller
+class UserVerifyRecordController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -41,6 +41,7 @@ class UserVerifyRecordController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => ''
         ]);
     }
 
@@ -52,6 +53,7 @@ class UserVerifyRecordController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => 'pro'
         ]);
     }
 

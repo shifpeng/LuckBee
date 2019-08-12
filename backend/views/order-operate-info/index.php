@@ -9,6 +9,8 @@ LayUIAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\OrderOperateInfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $env string */
+
 
 $this->title = '一推二推信息';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -32,7 +34,7 @@ $this->title = '一推二推信息';
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
 
 
     <div class="layui-form" style="padding: 10px;">

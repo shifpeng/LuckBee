@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * UserBaseInfoController implements the CRUD actions for TLmUserBaseInfo model.
  */
-class UserBaseInfoController extends Controller
+class UserBaseInfoController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -41,6 +41,7 @@ class UserBaseInfoController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => ''
         ]);
     }
 
@@ -52,6 +53,7 @@ class UserBaseInfoController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => 'pro'
         ]);
     }
 

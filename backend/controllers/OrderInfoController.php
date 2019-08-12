@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * OrderInfoController implements the CRUD actions for TLmApiOrderInfo model.
  */
-class OrderInfoController extends Controller
+class OrderInfoController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -41,6 +41,7 @@ class OrderInfoController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => ''
         ]);
     }
 
@@ -52,6 +53,8 @@ class OrderInfoController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => 'pro'
+
         ]);
     }
 
