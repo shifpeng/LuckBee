@@ -37,13 +37,13 @@ $str = $env == 'pro' ? 'search' : 'index';
             <div class="layui-inline">
                 <label class="layui-form-label">会员ID</label>
                 <div class="layui-input-inline">
-                    <?php echo $form->field($model, 'lm_member_id')->textInput(['placeholder' => '请输入公司名称', 'style' => 'width:200px;'])->label(false)->error(false) ?>
+                    <?php echo $form->field($model, 'lm_member_id')->textInput(['placeholder' => '请输入会员ID', 'style' => 'width:200px;'])->label(false)->error(false) ?>
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">产品ID</label>
                 <div class="layui-input-inline">
-                    <?php echo $form->field($model, 'product_id')->textInput(['placeholder' => '请输入公司名称', 'style' => 'width:200px;'])->label(false)->error(false) ?>
+                    <?php echo $form->field($model, 'product_id')->textInput(['placeholder' => '请输入产品ID', 'style' => 'width:200px;'])->label(false)->error(false) ?>
                 </div>
             </div>
         </div>
