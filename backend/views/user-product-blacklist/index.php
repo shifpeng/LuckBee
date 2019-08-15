@@ -90,6 +90,7 @@ $this->title = '用户产品黑名单';
                     'width' => '200px',
                     'template' => '{button1}',
                     'header' => '操作',
+                    'visible' => $env != 'pro',
                     'buttons' => ['button1' => function ($url, $model, $key) {
                         $label = '移除redis数据';
                         $options = [

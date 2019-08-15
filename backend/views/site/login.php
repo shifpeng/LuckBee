@@ -31,8 +31,8 @@ $fieldOptions2 = [
 
     <form class="form-horizontal" th:action="@{/login}" method="get">
         <div class="layui-form-item">
-            <label class="layui-form-label">输入框</label>
-            <div class="layui-input-block">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
                 <?= $form
                     ->field($model, 'username', $fieldOptions1)
                     ->label(false)
@@ -42,7 +42,7 @@ $fieldOptions2 = [
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">密码框</label>
-            <div class="layui-input-block">
+            <div class="layui-input-inline">
                 <?= $form
                     ->field($model, 'password', $fieldOptions2)
                     ->label(false)

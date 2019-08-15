@@ -7,98 +7,50 @@ use yii\helpers\Html;
 use \yii\helpers\Url;
 use \yii\widgets\Breadcrumbs;
 
-use backend\assets\LayUIAsset as LayUIAssetAlias;
+use backend\assets\LayUIAsset;
 
-LayUIAssetAlias::register($this);
-?>
-<?php $this->beginPage() ?>
-    <!DOCTYPE html>
-    <html lang="<?= Yii::$app->language ?>">
-    <head>
-        <meta charset="<?= Yii::$app->charset ?>">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
-        <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
-        <?php $this->head() ?>
-    </head>
-    <body>
+LayUIAsset::register($this);
+
+if (Yii::$app->controller->action->id === 'login') {
+    /**
+     * Do not use this code in your template. Remove it.
+     * Instead, use the code  $this->layout = '//main-login'; in your controller.
+     */
+    ?>
+    <?= $this->render(
+        'main-login',
+        ['content' => $content]
+    );
+} else {
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/assets/layui-v2.5.4/layui');
+    ?>
+    <?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+<head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+</head>
     <?php $this->beginBody() ?>
-
     <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo"> LuckBee 后台管理系统</div>
-            <!-- 头部区域（可配合layui已有的水平导航） -->
-            <ul class="layui-nav layui-layout-left">
-                <!--            --><?php //foreach ($this->context->topMenu as $item):?>
-                <!--                <li class="layui-nav-item --><? //= $item['active'] ? 'layui-this' : '' ?><!--">-->
-                <? //= Html::a($item['label'],$item['url'],[
-                //                        'data' => [
-                //                            'method' => 'post'
-                //                        ]
-                //                    ])?><!--</li>-->
-                <!--            --><?php //endforeach;?>
-            </ul>
-            <ul class=" layui-nav layui-layout-right
-            ">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">
-<!--                        --><?php //echo Yii::$app->user->identity->username ?>
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><?= Html::a('修改密码', '/admin/personal/reset-password') ?></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <?= Html::a('注销', '/site/logout', [
-                        'data' => [
-                            'method' => 'post'
-                        ]
-                    ]) ?>
-                </li>
-            </ul>
+            <?= $this->render(
+                'header.php',
+                ['directoryAsset' => $directoryAsset]
+            ) ?>
         </div>
-
         <div class="layui-side layui-bg-black">
-            <div class="layui-side-scroll">
-                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
-                    <!--                --><?php //foreach ($this->context->leftMenu as $item):?>
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;"><?= "测试环境" ?></a>
-                        <dl class="layui-nav-child" style="margin-bottom: 0px;">
-                            <!--                            --><?php //foreach ($item['items'] as $child):?>
-                            <dd><a href="<?= Url::toRoute("api-product-info/index") ?>"><?= "商户产品信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("user-base-info/index") ?>"><?= "用户基本信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("user-verify-record/index") ?>"><?= "撞库记录" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("order-info/index") ?>"><?= "订单基本信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("order-operate-info/index") ?>"><?= "一推二推信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("api-log/index") ?>"><?= "对接门面请求日志" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("user-product-blacklist/index") ?>"><?= "用户产品黑名单" ?></a></dd>
-                            <!--                            --><?php //endforeach;?>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;"><?= "生产环境" ?></a>
-                        <dl class="layui-nav-child">
-                            <!--                            --><?php //foreach ($item['items'] as $child):?>
-                            <dd><a href="<?= Url::toRoute("api-product-info/search") ?>"><?= "商户产品信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("user-base-info/search") ?>"><?= "用户基本信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("user-verify-record/search") ?>"><?= "撞库记录" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("order-info/search") ?>"><?= "订单基本信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("order-operate-info/search") ?>"><?= "一推二推信息" ?></a></dd>
-                            <dd><a href="<?= Url::toRoute("api-log/search") ?>"><?= "对接门面请求日志" ?></a></dd>
-                            <!--                        <dd ><a  href="-->
-                            <? //= Url::toRoute("api-product-info/index") ?><!--">--><? //= "商户产品信息" ?><!--</a></dd>-->
-                            <!--                            --><?php //endforeach;?>
-                        </dl>
-                    </li>
-                    <!--                --><?php //endforeach;?>
-                </ul>
-            </div>
+            <?= $this->render(
+                'left.php',
+                ['directoryAsset' => $directoryAsset]
+            )
+            ?>
         </div>
-
         <div class="layui-body">
             <!-- 内容主体区域 -->
             <div class="layui-row">
@@ -125,20 +77,25 @@ LayUIAssetAlias::register($this);
                 </div>
             </div>
         </div>
-
     </div>
-    <?php $this->endBody() ?>
     <script>
-        layui.use('element', function () {
-            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        window.onload = function () {
+            layui.use('element', function () {
+                var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 
-            //监听导航点击
-            element.on('nav(demo)', function (elem) {
-                //console.log(elem)
-                layer.msg(elem.text());
+                //监听导航点击
+                element.on('nav(demo)', function (elem) {
+                    // alert(elem.text());
+                    console.log(elem)
+                    // elem.text()
+                    // debugger
+                    // layer.msg();
+                });
+
             });
-        });
+        }
     </script>
     </body>
-    </html>
-<?php $this->endPage() ?>
+    <?php $this->endBody() ?>
+    <?php $this->endPage() ?>
+<?php } ?>

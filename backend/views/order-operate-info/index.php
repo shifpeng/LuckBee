@@ -177,6 +177,7 @@ $this->title = '一推二推信息';
                     'class' => 'kartik\grid\ActionColumn',
                     'width' => '200px',
                     'template' => '{button1}',
+                    'visible' => $env != 'pro',
                     'header' => '操作',
                     'buttons' => ['button1' => function ($url, $model, $key) {
                         $label = '重新一推';
@@ -191,6 +192,7 @@ $this->title = '一推二推信息';
                 [
                     'class' => 'kartik\grid\ActionColumn',
                     'width' => '200px',
+                    'visible' => $env != 'pro',
                     'template' => '{button1}',
                     'header' => '操作',
                     'buttons' => ['button1' => function ($url, $model, $key) {

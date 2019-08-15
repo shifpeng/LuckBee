@@ -1,100 +1,45 @@
-<aside class="main-sidebar">
+<?php
 
-    <section class="sidebar">
+use yii\helpers\Url;
+use backend\assets\LayUIAsset;
 
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-            </div>
-            <div class="pull-left info">
-                <p>Alexander Pierce</p>
+LayUIAsset::register($this);
+?>
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-        </div>
+<div class="layui-side-scroll">
+    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
+        <!--                --><?php //foreach ($this->context->leftMenu as $item):?>
+        <li class="layui-nav-item layui-nav-itemed">
+            <a class="" href="javascript:;"><?= "测试环境" ?></a>
+            <dl class="layui-nav-child" style="margin-bottom: 0px;">
+                <!--                            --><?php //foreach ($item['items'] as $child):?>
+                <dd><a href="<?= Url::toRoute("api-product-info/index") ?>"><?= "商户产品信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("user-base-info/index") ?>"><?= "用户基本信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("user-verify-record/index") ?>"><?= "撞库记录" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("order-info/index") ?>"><?= "订单基本信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("order-operate-info/index") ?>"><?= "一推二推信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("api-log/index") ?>"><?= "对接门面请求日志" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("user-product-blacklist/index") ?>"><?= "用户产品黑名单" ?></a></dd>
+                <!--                            --><?php //endforeach;?>
+            </dl>
+        </li>
+        <li class="layui-nav-item  layui-nav-itemed">
+            <a class="" href="javascript:;"><?= "生产环境" ?></a>
+            <dl class="layui-nav-child">
+                <!--                            --><?php //foreach ($item['items'] as $child):?>
+                <dd><a href="<?= Url::toRoute("api-product-info/search") ?>"><?= "商户产品信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("user-base-info/search") ?>"><?= "用户基本信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("user-verify-record/search") ?>"><?= "撞库记录" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("order-info/search") ?>"><?= "订单基本信息" ?></a></dd>
+                <dd><a href="<?= Url::toRoute("order-operate-info/search") ?>"><?= "一推二推信息" ?></a></dd>
+<!--                <dd><a href="--><?//= Url::toRoute("api-log/search") ?><!--">--><?//= "对接门面请求日志" ?><!--</a></dd>-->
+                <!--                        <dd ><a  href="-->
+                <? //= Url::toRoute("api-product-info/index") ?><!--">--><? //= "商户产品信息" ?><!--</a></dd>-->
+                <!--                            --><?php //endforeach;?>
+            </dl>
+        </li>
+        <!--                --><?php //endforeach;?>
+    </ul>
+</div>
 
-        <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>
-        <!-- /.search form -->
-
-        <?= dmstr\widgets\Menu::widget(
-            [
-                'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
-                'items' => [
-//                    ['label' => '商户产品信息', 'url' => ['api-product-info/index']],
-//                    ['label' => '用户基本信息', 'url' => ['user-base-info/index']],
-//                    ['label' => '撞库记录', 'url' => ['user-verify-record/index']],
-//                    ['label' => '订单基本信息', 'url' => ['order-info/index']],
-//                    ['label' => '一推二推信息', 'url' => ['order-operate-info/index']],
-                    [
-                        'label' => '测试环境',
-                        'icon' => 'file-code-o',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => '商户产品信息', 'url' => ['api-product-info/index']],
-                            ['label' => '用户基本信息', 'url' => ['user-base-info/index']],
-                            ['label' => '撞库记录', 'url' => ['user-verify-record/index']],
-                            ['label' => '订单基本信息', 'url' => ['order-info/index']],
-                            ['label' => '一推二推信息', 'url' => ['order-operate-info/index']],
-                            ['label' => '接口日志', 'url' => ['api-log/index']],
-                        ],
-                    ],
-                    [
-                        'label' => '生产环境',
-                        'icon' => 'file-code-o',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => '商户产品信息', 'url' => ['api-product-info/search']],
-                            ['label' => '用户基本信息', 'url' => ['user-base-info/search']],
-                            ['label' => '撞库记录', 'url' => ['user-verify-record/search']],
-                            ['label' => '订单基本信息', 'url' => ['order-info/search']],
-                            ['label' => '一推二推信息', 'url' => ['order-operate-info/search']],
-//                            ['label' => '接口日志', 'url' => ['api-log/search']],
-                        ],
-                    ],
-//                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-//                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-//                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-//                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-//                    [
-//                        'label' => 'Some tools',
-//                        'icon' => 'share',
-//                        'url' => '#',
-//                        'items' => [
-//                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-//                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-//                            [
-//                                'label' => 'Level One',
-//                                'icon' => 'circle-o',
-//                                'url' => '#',
-//                                'items' => [
-//                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-//                                    [
-//                                        'label' => 'Level Two',
-//                                        'icon' => 'circle-o',
-//                                        'url' => '#',
-//                                        'items' => [
-//                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-//                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-//                                        ],
-//                                    ],
-//                                ],
-//                            ],
-//                        ],
-//                    ],
-                ],
-            ]
-        ) ?>
-
-    </section>
-
-</aside>
