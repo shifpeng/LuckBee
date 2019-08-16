@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
         width: 120px;
     }
 </style>
-
+<?php
 $str = $env == 'pro' ? 'search' : 'index';
 ?>
 <?php $form = ActiveForm::begin([
