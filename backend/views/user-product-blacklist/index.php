@@ -29,7 +29,7 @@ $this->title = '用户产品黑名单';
 </style>
 <div class="">
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
     <div class="layui-form" style="padding: 10px;">
         <?= GridView::widget([
             'id' => 'grid-view-list',

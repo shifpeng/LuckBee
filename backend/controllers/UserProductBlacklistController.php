@@ -8,9 +8,11 @@ use backend\components\CurlInterface;
 use backend\models\search\UserProductBlacklistSearch;
 use backend\models\TLmfApiProductInfoContact;
 use Yii;
+use yii\web\Controller;
 
 class UserProductBlacklistController extends BaseController
 {
+//    public $enableCsrfValidation=false;
 
     public function init()
     {
@@ -36,6 +38,18 @@ class UserProductBlacklistController extends BaseController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'env' => ''
         ]);
     }
+
+    public function actionTest()
+    {
+        $data='{"appId":"155253200886585132054","bizParams":"{\"period_nos\":\"2\",\"repay_amount\":\"566.41\",\"success_time\":1565856789,\"orderNo\":\"656038747471895169002\",\"periodNos\":\"2\",\"repayPlace\":2,\"repayStatus\":1,\"successTime\":1565856789,\"remark\":\"总还款额:566.41\"}","method":"REPAY_CALLBACK","sign":"FqyFnlNhu/Kk8lsWZZfi/TlGTqeoSDd5XDpMMBieQ0EffaPDdZYhObQoBxscodYHISXmt76FaKy84ITzw08E2MvjqDa4ACx4Z3bho3uvaUeJhAzT6YSD9HyFyQrODN9B5ZiPK+HDACFRGfS+e/HADvUBU9ldqVkDsjneBAbPfwU=","signType":1,"timestamp":"1565856802518"}';
+        $curl = new  CurlInterface(json_decode($data), 6);
+        $result = $curl->execute("https://lmcontact.blackfish.cn/lmcontactfacade-web/contact/v1/callback", 'POST');
+        $this->log($result);
+        return $result;
+    }
+
+
 }

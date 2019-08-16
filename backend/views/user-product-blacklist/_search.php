@@ -13,8 +13,10 @@ use yii\widgets\ActiveForm;
     }
 </style>
 
+$str = $env == 'pro' ? 'search' : 'index';
+?>
 <?php $form = ActiveForm::begin([
-    'action' => ['index'],
+    'action' => [$str],
     'method' => 'get',
     'options' => [
         'data-pjax' => 1
