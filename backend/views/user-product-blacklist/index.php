@@ -13,10 +13,11 @@ LayUIAsset::register($this);
 /* @var $searchModel backend\models\search\UserProductBlacklistSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $env string */
+/* @var $other_info array */
 
 $this->title = '用户产品黑名单';
 //$this->params['breadcrumbs'][] = $this->title;
-
+$other_info=isset($other_info['data'])?$other_info['data']:[];
 ?>
 <style>
     .pagination {
@@ -77,14 +78,20 @@ $this->title = '用户产品黑名单';
                     'width' => '200px',
                 ],
                 [
-                    'label' => '添加时间',
+                    'label' => '撞库失败原因',
                     'attribute' => 'add_time',
                     'width' => '150px',
-                ],
-                [
-                    'label' => '更新时间',
-                    'attribute' => 'update_time',
+                    'value' => function ($model) use ($other_info){
+                        $status = [1 => '成功', 2 => '失败[机构返回]',3=>'冷却[审批拒绝、放款失败]',4=>'撞库超时、异常',5=>'筛选项过滤'];
+                        return isset($status[$other_info[$model->product_id]['status']]) ? $status[$other_info[$model->product_id]['status']] : '';;
+                    }
+                ],     [
+                    'label' => '撞库记录失效时间',
+                    'attribute' => 'add_time',
                     'width' => '150px',
+                    'value' => function ($model) use ($other_info){
+                        return $other_info[$model->product_id]['expireTime'];
+                    }
                 ],
                 [
                     'class' => 'kartik\grid\ActionColumn',
