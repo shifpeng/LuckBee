@@ -12,6 +12,7 @@ LayUIAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserProductBlacklistSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $env string */
 
 $this->title = '用户产品黑名单';
 //$this->params['breadcrumbs'][] = $this->title;

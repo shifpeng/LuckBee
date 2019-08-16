@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\UserProductBlacklistSearch */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $env string */
 ?>
 <style>
     .layui-form-label {
