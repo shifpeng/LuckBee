@@ -23,20 +23,24 @@ class UserProductBlacklistController extends BaseController
     {
         $searchModel = new UserProductBlacklistSearch();
         $postArr = isset(Yii::$app->request->queryParams['UserProductBlacklistSearch']) ? Yii::$app->request->queryParams['UserProductBlacklistSearch'] : [];
-//        $this->log(json_encode(Yii::$app->request->queryParams));
-        $arr = [];
+        $ids = [];
+        $result = [];
         if (isset($postArr['id'])) {
             $data = ['phoneNo' => $postArr['id']];
             $curl = new  CurlInterface(json_encode($data), 6);
-            $model = RequestConfig::findOne(['request_fun' => 'black_product']);
+            $model = RequestConfig::findOne(['request_fun' => 'bump_result']);
             $result = $curl->execute($model->request_url, 'POST');
-            $arr = $result['data']['productList'];
+            $ids = array_column($result['data'], 'productId');
+//            $this->log(json_encode($ids));
             $searchModel->id = $postArr['id'];
         }
-        $dataProvider = $searchModel->search($arr);
+
+        $dataProvider = $searchModel->search($ids);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'other_info' => $result,
             'env' => ''
         ]);
     }
@@ -61,7 +65,7 @@ class UserProductBlacklistController extends BaseController
 
 //        array_push($ids, 660, 661);//添加元素
 
-        $dataProvider = $searchModel->search($ids,'pro');
+        $dataProvider = $searchModel->search($ids, 'pro');
 
         return $this->render('index', [
             'searchModel' => $searchModel,

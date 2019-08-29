@@ -92,6 +92,9 @@ class UserBaseInfoSearch extends TLmUserBaseInfo
             ->andFilterWhere(['like', 'ip', $this->ip])
             ->andFilterWhere(['like', 'location', $this->location]);
 
+
+//        $query_master = TLmUserBaseInfo::find()->select('*')
+
         return $dataProvider;
     }
 }

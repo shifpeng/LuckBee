@@ -28,6 +28,7 @@ $this->title = '商户产品信息';
         height: 70px;
     }
 </style>
+<blockquote class="layui-elem-quote"><?php echo $this->title; ?></blockquote>
 <div class="">
 
     <!--    <h1>--><?php //echo Html::encode($this->title) ?><!--</h1>-->

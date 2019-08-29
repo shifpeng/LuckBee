@@ -3,6 +3,7 @@
 use backend\assets\LayUIAsset;
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 LayUIAsset::register($this);
@@ -14,6 +15,7 @@ LayUIAsset::register($this);
 
 $this->title = '用户基本信息';
 //$this->params['breadcrumbs'][] = $this->title;
+$url = Yii::$app->request->url;
 ?>
 <style>
     .pagination {
@@ -25,6 +27,7 @@ $this->title = '用户基本信息';
         height: 70px;
     }
 </style>
+<blockquote class="layui-elem-quote"><?php echo $this->title ?></blockquote>
 <?php Pjax::begin(); ?>
 <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
 <div class="layui-form" style="padding: 10px;">

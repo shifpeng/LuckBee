@@ -93,7 +93,6 @@ class OrderInfoSearch extends TLmApiOrderInfo
             'apply_time' => $this->apply_time,
             'add_time' => $this->add_time,
             'update_time' => $this->update_time,
-            'update_time' => $this->update_time,
 //            'repay_partial' => $this->repay_partial,
             'settle_status' => $this->settle_status,
 //            'user_is_new' => $this->user_is_new,

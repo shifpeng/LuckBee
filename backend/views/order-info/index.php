@@ -13,8 +13,10 @@ LayUIAsset::register($this);
 
 
 $this->title = '订单基本信息';
-//$this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
+<blockquote class="layui-elem-quote"><?php echo $this->title; ?></blockquote>
 <style>
     .pagination {
         position: fixed;
@@ -26,6 +28,7 @@ $this->title = '订单基本信息';
     }
 </style>
 <?php Pjax::begin(); ?>
+
 <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>
 
 <div class="layui-form" style="padding: 10px;">
@@ -49,7 +52,7 @@ $this->title = '订单基本信息';
             'lastPageLabel' => '尾页',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
             [
@@ -70,20 +73,28 @@ $this->title = '订单基本信息';
                 'attribute' => 'tenant_product_id',
                 'width' => '100px',
             ],
-//            '',
-//            'source',
-            //'reloan',
+            [
+                'label' => '来源',
+                'attribute' => 'source',
+                'width' => '220px',
+                'value' => function ($dataProvider) {
+                    $status = [0 => '小黑鱼 h5', 1 => '白鲸信用 app', '' => '', 2 => "未知来源 h5", 3 => "甲乙方: 急用钱 app", 4 => "小白鲸 h5", 5 => "白鲸查查 h5", 6 => "白鲸贷", 7 => "万能钱包", 9 => '阿拉丁钱包',
+                        100 => "快拿钱", 101 => '掌上小财', 102 => '全民现金', 103 => '拿钱快', 104 => '花不完', 105 => "爆米花", 106 => '拿钱花', 107 => '每周花', 108 => ' 有借有还', 109 => '闪电下', 110 => '叮当有米',
+                        111 => '鲨鱼闪贷', 112 => '闪钱包', 500 => '财神急救', 501 => '好财运', -1 => '老数据 未知'];
+                    return isset($status[$dataProvider->source]) ? $status[$dataProvider->source] : '';
+                },
+            ],
             [
                 'label' => '订单号',
                 'attribute' => 'order_no',
                 'width' => '250px',
             ],
 //            'order_no',
-            [
-                'label' => '数据ID',
-                'attribute' => 'base_data_id',
-                'width' => '250px',
-            ],
+//            [
+//                'label' => '数据ID',
+//                'attribute' => 'base_data_id',
+//                'width' => '250px',
+//            ],
 //            'base_data_id',
             //'base_data_hash',
             //'supplement_data_id',
@@ -98,6 +109,15 @@ $this->title = '订单基本信息';
             //'finished',
             //'distributor_statistics_valid',
 //            'status',
+            [
+                'label' => '首复贷',
+                'attribute' => 'reloan',
+                'width' => '100px',
+                'value' => function ($dataProvider) {
+                    $status = [0 => '首贷', 1 => '复贷'];
+                    return $status[$dataProvider->reloan];
+                },
+            ],
             [
                 'label' => '状态',
                 'attribute' => 'status',
@@ -170,6 +190,7 @@ $this->title = '订单基本信息';
                     return Html::button($label, $options);
                 }]
             ],
+
 //            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

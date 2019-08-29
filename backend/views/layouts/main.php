@@ -11,6 +11,7 @@ use backend\assets\LayUIAsset;
 
 LayUIAsset::register($this);
 
+$route = '/' . Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
 if (Yii::$app->controller->action->id === 'login') {
     /**
      * Do not use this code in your template. Remove it.
@@ -25,16 +26,16 @@ if (Yii::$app->controller->action->id === 'login') {
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/assets/layui-v2.5.4/layui');
     ?>
     <?php $this->beginPage() ?>
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+        <?= Html::csrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <?php $this->head() ?>
+    </head>
     <?php $this->beginBody() ?>
     <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
@@ -80,6 +81,8 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
     <script>
         window.onload = function () {
+            var route ="<?php echo $route ?>";
+            $("a[href='" + route + "'").parent().addClass("layui-this");
             layui.use('element', function () {
                 var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 

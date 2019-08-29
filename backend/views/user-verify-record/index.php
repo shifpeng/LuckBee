@@ -23,6 +23,7 @@ $this->title = '撞库记录';
         height: 70px;
     }
 </style>
+<blockquote class="layui-elem-quote"><?php echo $this->title; ?></blockquote>
 <div class="">
 
     <?php Pjax::begin(); ?>

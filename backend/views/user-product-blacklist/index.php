@@ -29,6 +29,7 @@ $other_info=isset($other_info['data'])?$other_info['data']:[];
         height: 70px;
     }
 </style>
+<blockquote class="layui-elem-quote"><?php echo $this->title; ?></blockquote>
 <div class="">
     <?php Pjax::begin(); ?>
     <?php echo $this->render('_search', ['model' => $searchModel, 'env' => $env]); ?>

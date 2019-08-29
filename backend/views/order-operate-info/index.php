@@ -25,6 +25,7 @@ $this->title = '一推二推信息';
         height: 70px;
     }
 </style>
+<blockquote class="layui-elem-quote"><?php echo $this->title;?></blockquote>
 <div class="">
 
     <!--    <h1>--><?php //echo Html::encode($this->title) ?><!--</h1>-->
